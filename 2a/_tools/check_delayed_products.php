@@ -86,7 +86,8 @@ $dbBasketItems = \CSaleBasket::GetList(
 
 while ($arBasketItem = $dbBasketItems->Fetch()) {
 
-    $arUsersIdsHaveDelayed[] = $arBasketItem['USER_ID'];//
+    $arUsersIdsHaveDelayed[] = $arBasketItem['USER_ID'];
+
     /** все отложенные товары за последние 30 дней */
     $arAllDelayedItemsInBasketByUserID[$arBasketItem['USER_ID']][] = $arBasketItem["PRODUCT_ID"];//
 
@@ -100,7 +101,7 @@ while ($arBasketItem = $dbBasketItems->Fetch()) {
 
 
 /**
- * $arAllDelayedItemsFormattedInBasketByUserID - это форматированные описания позиций, будут использованы при отравке
+ * $arAllDelayedItemsFormattedInBasketByUserID - это форматированные описания позиций, будут использованы при отправке
  * писем пользователям
  *
  * $arUsersIdsHaveDelayed - id пользователей, которые имеют в своих корзинах товары, отложенные за последние 30 дней
@@ -152,6 +153,9 @@ foreach($arUsersIdsHaveDelayed as $userIDHaveDelayed){
 
 $arResultItemsByUserID = array_diff($arResultItemsByUserID, array(''));
 
+/**
+ * шлём письма
+ */
 foreach($arResultItemsByUserID as $resultUserID => $arResultItems){
     if(empty($arResultItems)) continue;
 

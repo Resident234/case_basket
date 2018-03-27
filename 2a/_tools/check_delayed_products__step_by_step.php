@@ -294,6 +294,9 @@ if (!$_SESSION["STEP"]){
 
     /**  STEP SendImmediate  - START - */
 
+    /**
+     * шлём письма
+     */
     foreach ($_SESSION["DATA"]["arResultItemsByUserID"] as $resultUserID => $arResultItems) {
         if (empty($arResultItems)) continue;
 
